@@ -1,40 +1,15 @@
-// import Apollo (server), GQL, and Mongoose (ORM)
+// import Apollo (server) and Mongoose (ORM)
 const { ApolloServer } = require('apollo-server')
-const gql = require('graphql-tag')
 const mongoose = require('mongoose')
 
-// import Post model
-const Post = require('./models/Post')
+//import typeDefs
+const typeDefs = require('./graphql/typeDefs')
+
+//import resolvers
+const resolvers = require('./graphql/resolvers')
 
 // mongodb connection string
 const { MONGODB } = require('./config.js')
-
-// type definitions: get all posts + data from database and return to user
-// ! = required
-const typeDefs = gql`
-  type Post{
-    id: ID!
-    body: String!
-    createdAt: String!
-    username: String!
-  }
-  type Query{
-    getPosts: [Post]
-  }
-`
-// each query needs a resolver which returns something from a query
-const resolvers = {
-  Query: {
-    async getPosts() {
-      try{
-        const posts = await Post.find()
-        return posts
-      } catch(err){
-        throw new Error(err)
-      }
-    }
-  }
-}
 
 // set up Apollo server
 const server = new ApolloServer({
