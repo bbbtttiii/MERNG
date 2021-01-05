@@ -1,4 +1,4 @@
-const Post = require('../models/Post')
+const Post = require('../../models/Post')
 
 // each query needs a resolver which returns something from a query
 module.exports = {
@@ -12,4 +12,4 @@ module.exports = {
       }
     }
   }
-} 
+}

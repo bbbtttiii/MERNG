@@ -2,16 +2,14 @@
 const { ApolloServer } = require('apollo-server')
 const mongoose = require('mongoose')
 
-//import typeDefs
+// import typeDefs and resolvers
 const typeDefs = require('./graphql/typeDefs')
-
-//import resolvers
 const resolvers = require('./graphql/resolvers')
 
-// mongodb connection string
+// import mongodb connection string
 const { MONGODB } = require('./config.js')
 
-// set up Apollo server
+// define Apollo server
 const server = new ApolloServer({
   typeDefs,
   resolvers
@@ -24,7 +22,7 @@ mongoose
     console.log('MongoDB connected')
     return server.listen({ port: 5000 })
   })
-  // initialize server- returns a promise, which logs the url for easy access
+  // initialize server: returns a promise, which logs the url for easy access
   .then(res=> {
     console.log(`Server running at ${res.url}`)
   })
