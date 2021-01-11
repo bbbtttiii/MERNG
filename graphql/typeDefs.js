@@ -10,6 +10,8 @@ module.exports = gql`
     username: String!
     comments: [Comment!]!
     likes: [Like!]!
+    likeCount: Int!
+    commentCount: Int!
   }
   type Comment {
     id: ID!
@@ -48,5 +50,8 @@ module.exports = gql`
     deleteComment(postId: ID!, commentId: ID!): Post!
     # don't need 'unlikePost': like works as toggle
     likePost(postId: ID!): Post!
+  }
+  type Subscription{
+    newPost: Post!
   }
 `

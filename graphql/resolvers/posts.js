@@ -7,6 +7,7 @@ const checkAuth = require('../../utilities/checkAuth')
 module.exports = {
 
   Query: {
+    
     async getPosts() {
       try {
         // {createdAt: -1} to sort in descending order
@@ -31,6 +32,7 @@ module.exports = {
   },
 
   Mutation: {
+
     async createPost(_, { body }, context) {
       const user = checkAuth(context)
       const newPost = new Post({
@@ -40,8 +42,12 @@ module.exports = {
         createdAt: new Date().toISOString()
       })
       const post = await newPost.save()
+      context.pubsub.publish('NEW_POST', {
+        newPost: post
+      })
       return post
     },
+
     async deletePost(_, { postId }, context) {
       const user = checkAuth(context)
       //need to check that post belongs to user!
@@ -57,6 +63,7 @@ module.exports = {
         throw new Error(err)
       }
     },
+
     async likePost(_, { postId }, context) {
       const { username } = checkAuth(context)
       const post = await Post.findById(postId)
@@ -75,6 +82,13 @@ module.exports = {
         await post.save()
         return post
       } else throw new UserInputError('Post not found')
+    }
+  },
+
+  Subscription: {
+    newPost: {
+      // ?
+      subscribe: (_, __, { pubsub }) => pubsub.asyncIterator('NEW_POST')
     }
   }
 }
