@@ -7,7 +7,7 @@ const checkAuth = require('../../utilities/checkAuth')
 module.exports = {
 
   Query: {
-    
+
     async getPosts() {
       try {
         // {createdAt: -1} to sort in descending order
@@ -35,6 +35,10 @@ module.exports = {
 
     async createPost(_, { body }, context) {
       const user = checkAuth(context)
+      // check if post is empty
+      if (args.body.trim() === '' ) {
+        throw new Error('Post body must not be empty')
+      }
       const newPost = new Post({
         body,
         user: user.indexOf,
