@@ -6,10 +6,7 @@ import PostCard from '../components/PostCard'
 
 export default function Home() {
 
-  const {
-    loading,
-    data: { getPosts: posts } = {}
-  } = useQuery(FETCH_POSTS_QUERY)
+  const { loading, data: { getPosts: posts } = {} } = useQuery(FETCH_POSTS_QUERY)
 
   return (
     <Grid columns={3}>
