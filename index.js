@@ -12,6 +12,9 @@ const { MONGODB } = require('./config.js')
 // define PubSub
 const pubsub = new PubSub()
 
+// define port
+const PORT = process.env.port || 5000
+
 // define Apollo server
 const server = new ApolloServer({
   typeDefs,
@@ -24,10 +27,12 @@ mongoose
   .connect(MONGODB, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('MongoDB connected')
-    return server.listen({ port: 5000 })
+    return server.listen({ port: PORT })
   })
   // initialize server: returns a promise, which logs the url for easy access
   .then(res=> {
     console.log(`Server running at ${res.url}`)
   })
-
+  .catch(err => {
+    console.log(`Error: ${err}`)
+  })

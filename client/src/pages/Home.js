@@ -18,7 +18,7 @@ export default function Home() {
           <h1>Loading posts...</h1>
         ) : (
             posts && posts.map(post => (
-              <Grid.Column key={post.id} style={{ marginBottom: 20 }}>
+              <Grid.Column key={post.id} style={{ marginBottom: 30 }}>
                 <PostCard post={post} />
               </Grid.Column>
             ))
