@@ -1,6 +1,6 @@
 # MERNG Social Media App
 - React w/ Semantic UI
 - Express
-- MongoDB + Mongoose
-- Node Server
+- Node
+- MongoDB
 - GraphQL + Apollo

@@ -19,7 +19,7 @@ const PORT = process.env.port || 5000
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => { req, pubsub }
+  context: ({ req }) => ({ req, pubsub })
 })
 
 // connect to db

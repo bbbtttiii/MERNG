@@ -15,7 +15,6 @@ export default function Login(props) {
     password: ''
   })
 
-
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(_, {data: { login: userData }}) {
       context.login(userData)
@@ -27,6 +26,7 @@ export default function Login(props) {
     variables: values
   })
 
+  //function hoisted
   function loginUserCallback(){
     loginUser() 
   }
