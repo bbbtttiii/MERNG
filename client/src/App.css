@@ -18,3 +18,8 @@
 .form-item{
   margin-bottom: 10px;
 } */
+
+.ui.teal.button:focus,
+.ui.teal.buttons .button:focus{
+  background-color: #00b5ad;
+}
