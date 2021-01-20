@@ -5,6 +5,7 @@ import moment from 'moment'
 
 import { AuthContext } from '../context/auth'
 import LikeButton from './LikeButton'
+import DeleteButton from './DeleteButton'
 
 export default function PostCard({ post: { body, createdAt, id, username, likeCount, commentCount, likes } }) {
 
@@ -28,7 +29,7 @@ export default function PostCard({ post: { body, createdAt, id, username, likeCo
       </Card.Content>
       <Card.Content extra>
 
-        <LikeButton user={user} post={{ id, likes, likeCount }}/>
+        <LikeButton user={user} post={{ id, likes, likeCount }} />
 
         {/* comment button */}
         <Button labelPosition='right' as={Link} to={`/posts/${id}`}>
@@ -41,11 +42,7 @@ export default function PostCard({ post: { body, createdAt, id, username, likeCo
         </Button>
 
         {/* delete button */}
-        {user && user.username === username && (
-          <Button as='div' color='red' floated='right' onClick={() => console.log('delete post')}>
-            <Icon name='trash' style={{width: 5}}/>
-          </Button>
-        )}
+        {user && user.username === username && <DeleteButton postId={id} />}
 
       </Card.Content>
     </Card>
