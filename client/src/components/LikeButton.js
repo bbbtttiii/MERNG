@@ -35,7 +35,7 @@ export default function LikeButton({ user, post: { id, likes, likeCount } }) {
     )
 
   return (
-    <Button as='div' labelPosition ='right' onClick={ likePost }>
+    <Button as='div' labelPosition ='right' onClick={ user ? likePost : null }>
       { likeButton }
       <Label basic color='teal' pointing ='left'>
         { likeCount }
